@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands\Service;
 
+use App\Models\Category;
 use Illuminate\Console\Command;
 
 class CategoryParsing extends Command
@@ -39,6 +40,7 @@ class CategoryParsing extends Command
     {
         $categories_2 = \DB::connection('mysql_2')->table('categories');
         $categories = \DB::connection('mysql')->table('categories');
+//        $category = Category::class;
         $noTruncate = $this->option('no-truncate');
 
         $this->info('Start parsing categories...');
@@ -54,10 +56,9 @@ class CategoryParsing extends Command
 
         foreach ($categories_2->get() as $category_2) {
 
-            $categories->insert([
+            Category::create([
                 'published' => $category_2->published,
                 'name' => $category_2->name,
-                'slug' => $category_2->slug,
                 'created_at' => now(),
                 'updated_at' => null,
             ]);
@@ -66,6 +67,9 @@ class CategoryParsing extends Command
         }
 
         $bar->finish();
+
+        $this->newLine();
+        $this->info('All categories processed!');
 
         return 1;
     }

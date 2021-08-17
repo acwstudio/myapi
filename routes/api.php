@@ -14,10 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::middleware('auth:api')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
+Route::prefix('v1/base/')->group(function () {
 
-Route::middleware('api')->get('/user', function (Request $request) {
-    return 'ok';
+    /*****************  CATEGORIES ROUTES **************/
+    Route::apiResource('/categories', \App\Http\Controllers\Base\Category\CategoryController::class, ['as' => 'base']);
+
 });

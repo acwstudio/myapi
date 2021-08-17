@@ -14,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('Base')->get('/user', function (Request $request) {
-    return 'ok';
-});
+//Route::middleware('Base')->get('/user', function (Request $request) {
+//    return 'ok';
+//});
